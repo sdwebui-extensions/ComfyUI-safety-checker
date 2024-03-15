@@ -144,6 +144,10 @@ class ClipSafetyChecker(PreTrainedModel):
                 if any(nsfw_concepts):
                     logging.warning("Safety Checker: NSFW content detected. Replaced with black output.")
 
+                # Return a single boolean if the size of nsfw_concepts is 1 for easier processing downstream
+                if len(nsfw_concepts) == 1:
+                    return images, nsfw_concepts[0]
+
                 return images, nsfw_concepts
 
         except Exception as e:
