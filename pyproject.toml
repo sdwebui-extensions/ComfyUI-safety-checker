@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-safety-checker"
+description = "A NSFW/Safety Checker Node for ComfyUI."
+version = "1.0.0"
+license = "LICENSE"
+
+[project.urls]
+Repository = "https://github.com/42lux/ComfyUI-safety-checker"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-safety-checker"
+Icon = ""
