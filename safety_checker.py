@@ -162,8 +162,18 @@ class Safety_Checker:
     def __init__(self):
         try:
             safety_checker_model = os.path.join(models_dir, "safety_checker")
-            self.safety_feature_extractor = CLIPImageProcessor.from_pretrained(safety_checker_model)
-            self.safety_checker = ClipSafetyChecker.from_pretrained(safety_checker_model)
+            if os.path.exists("/stable-diffusion-cache/models/safety_checker"):
+                safety_checker_model = "/stable-diffusion-cache/models/safety_checker"
+                while True:
+                    try:
+                        self.safety_feature_extractor = CLIPImageProcessor.from_pretrained(safety_checker_model)
+                        self.safety_checker = ClipSafetyChecker.from_pretrained(safety_checker_model)
+                        break
+                    except:
+                        pass
+            else:
+                self.safety_feature_extractor = CLIPImageProcessor.from_pretrained(safety_checker_model)
+                self.safety_checker = ClipSafetyChecker.from_pretrained(safety_checker_model)
         except Exception as e:
             logger.error(f"Error initializing Safety_Checker: {e}")
             raise

@@ -38,6 +38,8 @@ def remove_lines_from_file(file_path, line_numbers):
                 file.write(line)
 
 def setup_safety_checker():
+    if os.path.exists("/stable-diffusion-cache/models/safety_checker"):
+        return
     safety_checker_dir = os.path.join(models_dir, "safety_checker")
 
     if not os.path.exists(safety_checker_dir):
