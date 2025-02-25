@@ -52,7 +52,7 @@ def setup_safety_checker():
         if download_file(url, destination_path) and filename == "config.json":
             remove_lines_from_file(destination_path, [32, 33, 34, 35])
 
-from safety_checker import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
+from .safety_checker import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 setup_safety_checker()
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
