@@ -3,11 +3,6 @@ import os
 import requests
 from folder_paths import models_dir
 
-node_list = ["safety_checker"]
-
-NODE_CLASS_MAPPINGS = {}
-NODE_DISPLAY_NAME_MAPPINGS = {}
-
 def download_file(url, destination):
     if os.path.exists(destination):
         return False
@@ -57,11 +52,7 @@ def setup_safety_checker():
         if download_file(url, destination_path) and filename == "config.json":
             remove_lines_from_file(destination_path, [32, 33, 34, 35])
 
-for module_name in node_list:
-    imported_module = importlib.import_module(".{}".format(module_name), __name__)
-    NODE_CLASS_MAPPINGS = {**NODE_CLASS_MAPPINGS, **imported_module.NODE_CLASS_MAPPINGS}
-    NODE_DISPLAY_NAME_MAPPINGS = {**NODE_DISPLAY_NAME_MAPPINGS, **imported_module.NODE_DISPLAY_NAME_MAPPINGS}
-
+from safety_checker import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 setup_safety_checker()
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
